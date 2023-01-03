@@ -26,8 +26,7 @@ class Database{
     public function get($query){
         $result = $this->connection->query($query);
         if($result->num_rows!=0){
-            $object = $result->fetch_object();
-            return $object;
+            return $result;
         }else{
             return false;
         }

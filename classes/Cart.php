@@ -2,7 +2,11 @@
 
 class Cart{
     private $db;
-    public function hello(){
-        echo "hello";
+    public function __construct(){
+        $this->db = Database::getInstance();
+    }
+
+    public function add(){
+        
     }
 }
