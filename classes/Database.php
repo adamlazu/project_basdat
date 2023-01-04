@@ -39,6 +39,22 @@ class Database{
             return false;
         }
     }
+    
+    public function update($query){
+        if($this->connection->query($query)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function delete($query){
+        if($this->connection->query($query)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public function escape($string){
         $string = $this->connection->real_escape_string($string);

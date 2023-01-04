@@ -68,7 +68,7 @@ $detail = $product->getbyid($product_id);
                                 </div>
                             </div>
                             <p class="about"><?php echo $detail->description; ?></p>
-                            <div class="cart mt-4 align-items-center"> <button class="btn btn-primary text-uppercase mr-2 px-4">Add to cart</button> <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> </div>
+                            <div class="cart mt-4 align-items-center"> <a class="btn btn-primary text-uppercase mr-2 px-4" href="carthandling.php?method=new&product_id=<?php echo $detail->id ?>">Add to cart</a> <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> </div>
                         </div>
                     </div>
                 </div>

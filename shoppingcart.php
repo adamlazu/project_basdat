@@ -1,5 +1,7 @@
 <?php 
 require_once "./core/init.php";
+$current_cart = $cart->get((int)$_SESSION["user"]["id"]);
+$total = 0;
 ?>
 
 <!DOCTYPE html>
@@ -41,6 +43,7 @@ require_once "./core/init.php";
   </div>
 </nav>
 
+<?php if($current_cart){ ?>
 <section class="h-100" style="background-color: #eee;">
   <div class="container h-100 py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -50,33 +53,35 @@ require_once "./core/init.php";
           <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
         </div>
 
+        <?php while($carts = $current_cart->fetch_object()){ 
+              $productdetail = $product->getbyid((int)$carts->product_id)?>
         <div class="card rounded-3 mb-4">
           <div class="card-body p-4">
             <div class="row d-flex justify-content-between align-items-center">
               <div class="col-md-2 col-lg-2 col-xl-2">
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
+                  src="./storage/<?php echo $productdetail->imgname; ?>.png"
                   class="img-fluid rounded-3" alt="Cotton T-shirt">
               </div>
               <div class="col-md-3 col-lg-3 col-xl-3">
-                <p class="lead fw-normal mb-2">Basic T-shirt</p>
+                <p class="lead fw-normal mb-2"><?php echo $productdetail->name; ?></p>
                 
               </div>
               <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                <button class="btn btn-link px-2"
-                  onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                  min
-                </button>
+                <a class="btn btn-primary px-2" href="carthandling.php?method=add&id=<?php echo $carts->id; ?>">
+                  +
+                </a>
 
-                2
+                <div>
+                  <h5 class="text-center mx-3"><?php echo $carts->quantity; ?></h5>
+                </div>
 
-                <button class="btn btn-link px-2"
-                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                  add
-                </button>
+                <a class="btn btn-primary px-2" href="carthandling.php?method=min&id=<?php echo $carts->id; ?>">
+                  -
+                </a>
               </div>
               <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                <h5 class="mb-0">Rp499.00</h5>
+                <h5 class="mb-0">Rp<?php echo number_format($productdetail->price, 0, "", "."); ?></h5>
               </div>
               <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                 <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
@@ -84,11 +89,11 @@ require_once "./core/init.php";
             </div>
           </div>
         </div>
-
+        <?php $total = $total + $carts->quantity*$productdetail->price; }?>
 
         <div class="card mb-3">
           <div class="card-body">
-            <h5>Total: Rp</h5>
+            <h5>Total: Rp <?php echo number_format($total, 0, "", "."); ?></h5>
           </div>
         </div>
 
@@ -102,6 +107,10 @@ require_once "./core/init.php";
     </div>
   </div>
 </section>
+<?php }else{ ?>
+<h3>cart masih kosong</h3>
+<?php }?>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
