@@ -42,6 +42,9 @@ $productList = $product->getAll();
         <li class="nav-item">
           <a class="nav-link" href="shoppingcart.php?user_id=<?php echo $_SESSION['user']['id']; ?>">cart</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="transactionhistory.php?user_id=<?php echo $_SESSION['user']['id']; ?>">history</a>
+        </li>
         <?php } ?>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">logout</a>

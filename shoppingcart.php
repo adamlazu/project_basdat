@@ -34,6 +34,9 @@ $total = 0;
         <li class="nav-item">
           <a class="nav-link active" href="shoppingcart.php?user_id=<?php echo $_SESSION['user']['id']; ?>">cart</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="transactionhistory.php?user_id=<?php echo $_SESSION['user']['id']; ?>">history</a>
+        </li>
         <?php } ?>
         <li class="nav-item">
           <a class="nav-link" href="logout.php">logout</a>
@@ -99,7 +102,7 @@ $total = 0;
 
         <div class="card">
           <div class="card-body">
-            <button type="button" class="btn btn-primary btn-block btn-lg">Proceed to Pay</button>
+            <a type="button" class="btn btn-primary btn-block btn-lg" href="checkout.php">Proceed to Pay</a>
           </div>
         </div>
 
@@ -116,3 +119,7 @@ $total = 0;
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<?php
+$_SESSION["total"]=$total;
+?>

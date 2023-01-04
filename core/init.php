@@ -10,4 +10,5 @@ spl_autoload_register(function($class){
 $user = new User();
 $product = new Product();
 $cart = new Cart();
+$transaction = new Transaction();
 ?>
